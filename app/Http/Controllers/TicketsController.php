@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 
 use Teach\Http\Requests;
 use Teach\Http\Controllers\Controller;
+use Teach\Entities\Ticket;
 
 class TicketsController extends Controller
 {
    public function latest()
-   {
-   		return view('tickets/list');
+   {    
+       $tickets = Ticket::orderby('created_at', 'DESC')->paginate(10);
+       
+   		return view('tickets/list', compact('tickets'));
    }
 
    public function populares()
@@ -31,6 +34,7 @@ class TicketsController extends Controller
 
    public function details($id)
    {
-   		return view('tickets/details');
+        $ticket = Ticket::findOrfail($id);
+   		return view('tickets/details', compact('ticket'));
    }
 }
