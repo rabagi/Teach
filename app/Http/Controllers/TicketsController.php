@@ -11,26 +11,26 @@ class TicketsController extends Controller
 {
    public function latest()
    {
-   		return view('tickets/ticket');
+   		return view('tickets/list');
    }
 
    public function populares()
    {
-   		return view('tickets/detail');
+   		return view('tickets/list');
    }
 
    public function open()
    {
-   		return view('tickets/detail');
+   		return view('tickets/list');
    }
 
    public function closed()
    {
-   		return view('tickets/detail');
+   		return view('tickets/details');
    }
 
    public function details($id)
    {
-   		return view('tickets/detail');
+   		return view('tickets/details');
    }
 }

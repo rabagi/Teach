@@ -138,7 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
     
 
-        Collective\Html\HtmlServiceProvider::class,
+       // Collective\Html\HtmlServiceProvider::class,
    
 
         /*
@@ -148,6 +148,7 @@ return [
         Teach\Providers\AuthServiceProvider::class,
         Teach\Providers\EventServiceProvider::class,
         Teach\Providers\RouteServiceProvider::class,
+        Teach\Providers\HtmlServiceProvider::class,
 
     ],
 
