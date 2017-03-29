@@ -36,4 +36,15 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    
+    public function voted()
+    {
+        return $this->belongsTomany(Ticket::class, 'ticket_votes');
+    }
+    
 }

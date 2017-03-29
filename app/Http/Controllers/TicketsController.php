@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Teach\Http\Requests;
 use Teach\Http\Controllers\Controller;
 use Teach\Entities\Ticket;
+use Teach\Entities\TicketComment;
 
 class TicketsController extends Controller
 {
@@ -23,8 +24,9 @@ class TicketsController extends Controller
    }
 
    public function open()
-   {
-   		return view('tickets/list');
+   {    
+        $tickets = Ticket::orderby('created_at', 'DESC')->paginate(10);
+   		return view('tickets/list', compact('tickets'));
    }
 
    public function closed()
@@ -34,7 +36,7 @@ class TicketsController extends Controller
 
    public function details($id)
    {
-        $ticket = Ticket::findOrfail($id);
+        $ticket = Ticket::findOrfail($id);       
    		return view('tickets/details', compact('ticket'));
    }
 }
