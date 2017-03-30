@@ -10,7 +10,7 @@ class Ticket extends Model
     
     public function author()
     {
-        return $this->belongTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     
     public function comments()

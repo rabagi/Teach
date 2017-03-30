@@ -14,10 +14,7 @@
                 </h1>
 
                 <p class="label label-info news">
-                    <?php 
-                    
-              
-                    ?>
+
                     {{ trans_choice(Route::currentRouteName(). '_total',  $tickets->total()) }}
                                
                 </p>
@@ -29,7 +26,7 @@
                 {!! $tickets->render() !!}
 
                 <p>
-                <a href="http://duilio.me" target="_blank">::::: Teach :::::</a>
+                    <a href="http://duilio.me" target="_blank">::::: Teach :::::</a>
                 </p>
 
         </div>
