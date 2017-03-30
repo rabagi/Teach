@@ -11,6 +11,13 @@
                 @include('tickets/partials/status', compact('ticket'))
                 
             </h2>
+
+
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
             
             <p class="date-t"><span class="glyphicon glyphicon-time"></span> 
                 {{ $ticket->created_at->format('d/m/Y h:ia') }}
@@ -51,18 +58,21 @@
             <h3>Nuevo Comentario</h3>
             
 
-
-            {!! Form::open(['route' => ['comments.submit', $ticket->id], 'method' => 'POST'] ) !!}
+            @include('partials/errors')
+            <form  action="{{ route('comments.submit', $ticket->id) }}" method="POST">   
+            {!! csrf_field() !!}
                 <div class="form-group">
                     <label for="comment">Comentarios:</label>
-                    <textarea rows="4" class="form-control" name="comment" cols="50" id="comment"></textarea>
+                    <textarea rows="4" class="form-control" name="comment" cols="50" id="comment" >
+{{old('comment') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="link">Enlace:</label>
-                    <input class="form-control" name="link" type="text" id="link">
+                    <input class="form-control" name="link" type="text" id="link" value="{{old('link')}}" >
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar comentario</button>
-            {!! Form::close() !!}
+            </form>
+
             
             <h3>Comentarios ( {{ count($ticket->comments) }} )</h3>
             
@@ -73,6 +83,13 @@
                 <p> 
                     {{ $comment->comment }}
                 </p>
+                @if ($comment->link)
+                    <p>
+                        <a href="{{ $comment->link }}" target="_blank" rel="nofollow">{{ $comment->link }}</a>
+                    </p>
+
+                @endif
+
                 <p class="date-t"><span class="glyphicon glyphicon-time"></span> 
                    {{$comment->created_at->format('d/m/Y h:ia')}}
                 </p>

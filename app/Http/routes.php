@@ -93,9 +93,6 @@ Route::group(['middleware' => 'auth'],function  (){
     ]);
     
     //comentar
-    
-
-    
     Route::post('comentar/{id}', [
     'as' => 'comments.submit',
     'uses' => 'CommentsController@submit',
