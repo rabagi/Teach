@@ -7,17 +7,30 @@ use Illuminate\Http\Request;
 use Teach\Http\Requests;
 use Teach\Http\Controllers\Controller;
 
+use Teach\Entities\Ticket;
+
 class VotesController extends Controller
 {
+ 
     
     public function submit($id)
     {
-        dd('votando por ticket: ' . $id);
+        $ticket = Ticket::findOrfail($id);
+        
+        currentUser()->vote($ticket);
+        
+        return redirect()->back();
         
     }
     
+    
     public function destroy($id)
     {
-        dd('quitando voto de ticket: ' . $id);    
+        $ticket = Ticket::findOrfail($id);        
+        currentUser()->unvote($ticket);
+        
+        return redirect()->back();  
     }
+    
+    
 }

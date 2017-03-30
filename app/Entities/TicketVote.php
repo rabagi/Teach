@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class TicketVote extends Model
 {
+    
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);
     }
+    
     
     public function user()
     {

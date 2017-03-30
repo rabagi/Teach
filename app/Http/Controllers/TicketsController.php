@@ -43,9 +43,9 @@ class TicketsController extends Controller
    }
 
     
-   public function details($id)
+   public function details($id, Guard $auth)
    {
-        $ticket = Ticket::findOrfail($id);       
+        $ticket = Ticket::findOrfail($id);   
    		return view('tickets/details', compact('ticket'));
    }
     

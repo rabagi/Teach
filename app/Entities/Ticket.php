@@ -23,7 +23,7 @@ class Ticket extends Model
     public function voters()
     {
         
-        return $this->belongsToMany(User::class, 'ticket_votes');
+        return $this->belongsToMany(User::class, 'ticket_votes')->withTimestamps();
         
     }
     
