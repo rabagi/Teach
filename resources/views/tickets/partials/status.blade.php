@@ -1,5 +1,5 @@
 <span {!! Html::classes(['label label-info absolute', 'highlight' => $ticket->open]) !!}> 
 
-    {{ $ticket->status }}
+    {{ trans('tickets.status.' . $ticket->status )}}
 
 </span>

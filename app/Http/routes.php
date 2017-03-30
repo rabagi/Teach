@@ -34,12 +34,14 @@ Route::get('/pendientes',  [
 
 	]);
 
+
 Route::get('/tutoriales',  [
 
 	'as' => 'tickets.closed',
 	'uses' => 'TicketsController@closed'
 
 	]);
+
 
 Route::get('/solicitud/{id}', [
 
@@ -48,9 +50,70 @@ Route::get('/solicitud/{id}', [
 
 	]);
 
+
 Route::controllers([
 
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 
 	]);
+
+
+Route::group(['middleware' => 'auth'],function  (){
+    
+    ///crear solicitudes
+    Route::get('/solicitar', [
+        
+
+        'uses' => 'TicketsController@create',
+        
+    ]);
+
+    Route::post('/solicitar', [
+        
+        'as' => 'tickets.store',
+        'uses' => 'TicketsController@store',
+        
+    ]);
+    
+    ///votar
+    
+    Route::post('votar/{id}', [
+        
+        'as' => 'vote.submit',
+        'uses' => 'VotesController@submit',
+        
+    ]);
+    
+    Route::delete('votar/{id}', [
+        
+        'as' => 'vote.destroy',
+        'uses' => 'VotesController@destroy',
+        
+    ]);
+    
+    //comentar
+    
+
+    
+    Route::post('comentar/{id}', [
+    'as' => 'comments.submit',
+    'uses' => 'CommentsController@submit',
+        
+    ]);
+    
+    Route::delete('comentar/{id}', [
+    'as' => 'comment.destroy',
+    'uses' => 'CommentsController@destroy',
+        
+    ]);
+    
+    
+
+    
+    
+});
+    
+
+
+

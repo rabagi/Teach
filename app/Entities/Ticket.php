@@ -5,10 +5,12 @@ namespace Teach\Entities;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
-{
+{   
+    protected $fillable = ['title', 'status'];
+    
     public function author()
     {
-        return $this->belongTo(User::class);
+        return $this->belongTo(User::class, 'user_id');
     }
     
     public function comments()

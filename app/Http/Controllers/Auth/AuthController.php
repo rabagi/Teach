@@ -2,7 +2,7 @@
 
 namespace Teach\Http\Controllers\Auth;
 
-use Teach\User;
+use Teach\entities\User;
 use Validator;
 use Teach\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -61,5 +61,16 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+
+        return '/';
     }
 }
