@@ -11,12 +11,17 @@
 |
 */
 
+Route::get('/encuesta',   function(){
+
+    return view('survey/survey');
+});
+
 Route::get('/',  [
 
-	'as' => 'tickets.latest',
-	'uses' => 'TicketsController@latest'
+    'as' => 'tickets.latest',
+    'uses' => 'TicketsController@latest'
 
-	]);
+    ]);
 
 
 Route::get('/populares',  [

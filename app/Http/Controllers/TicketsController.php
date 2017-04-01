@@ -13,10 +13,24 @@ use Teach\Entities\TicketComment;
 
 class TicketsController extends Controller
 {
+
+  protected function selectTicketsList()
+  {
+    return Ticket::selectRaw(
+          'tickets.*, '
+          .'(SELECT COUNT(*) FROM ticket_comments WHERE ticket_comments.ticket_id = tickets.id) as num_comments,'
+          .'(SELECT COUNT(*) FROM ticket_votes WHERE ticket_votes.ticket_id = tickets.id) as num_votes'
+          
+        )->with('author');
+
+  }
+    
     
    public function latest()
    {    
-       $tickets = Ticket::orderby('created_at', 'DESC')->paginate(10);
+       $tickets = $this->selectTicketsList()
+        ->orderBy('created_at', 'DESC')  
+        ->paginate(10);
        
    		return view('tickets/list', compact('tickets'));
    }
@@ -30,14 +44,21 @@ class TicketsController extends Controller
     
    public function open()
    {    
-        $tickets = Ticket::where('status', 'open')->orderby('created_at', 'DESC')->paginate(10);
-   		return view('tickets/list', compact('tickets'));
+        $tickets = $this->selectTicketsList()
+        ->where('status', 'open')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(10);
+   		
+        return view('tickets/list', compact('tickets'));
    }
     
 
    public function closed()
    {
-        $tickets = Ticket::where('status', 'close')->orderby('created_at', 'DESC')->paginate(10);
+        $tickets = $this->selectTicketsList()
+        ->where('status', 'close')
+        ->orderby('created_at', 'DESC')
+        ->paginate(10);
 
    		return view('tickets/list', compact('tickets', 'title'));
    }
